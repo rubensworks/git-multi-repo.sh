@@ -9,6 +9,8 @@ print_usage () {
 	echo "  add           Add a repository at the given directory."
 	echo "  status        Show a one-line short repo status of all repos."
 	echo "  pull          Pull the latest version of the current branch from their origin of all repos."
+	echo "  fetch         Fetch the origin of all repos."
+	echo "  push          Push the latest version of the current branch to their origin of all repos."
 	echo "  stash         Run git stash in all repos."
 	echo "  set           Forcefully add the given file or directory in all repos, and stage changes."
 	echo "  commit        Creates a commit based on currently stages changes in all repos."
@@ -63,6 +65,10 @@ status)
     $lib_dir/status.sh $remainingargs
     ;;
 pull)
+	ensure_initialized
+    $lib_dir/pull.sh $remainingargs
+    ;;
+fetch)
 	ensure_initialized
     $lib_dir/pull.sh $remainingargs
     ;;
