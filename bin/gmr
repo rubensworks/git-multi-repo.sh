@@ -9,6 +9,7 @@ print_usage () {
 	echo "  add           Add a repository at the given directory."
 	echo "  status        Show a one-line short repo status of all repos."
 	echo "  pull          Pull the latest version of the current branch from their origin of all repos."
+	echo "  stash         Run git stash in all repos."
     exit 1
 }
 
@@ -52,6 +53,10 @@ pull)
 push)
 	ensure_initialized
     $lib_dir/push.sh $remainingargs
+    ;;
+stash)
+	ensure_initialized
+    $lib_dir/stash.sh $remainingargs
     ;;
 *)
     echo "Invalid action '$action'"
