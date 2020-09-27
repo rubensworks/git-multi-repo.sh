@@ -6,6 +6,7 @@ print_usage () {
     echo "Actions:"
     echo "  version       Prints the current gmr version."
     echo "  init          Initializes a multi repo management environment."
+	echo "  add           Add a repository at the given directory."
     exit 1
 }
 
@@ -33,6 +34,10 @@ version)
     ;;
 init)
     $lib_dir/init.sh $remainingargs
+    ;;
+add)
+	ensure_initialized
+    $lib_dir/add.sh $remainingargs
     ;;
 *)
     echo "Invalid action '$action'"
