@@ -7,6 +7,7 @@ print_usage () {
     echo "  version       Prints the current gmr version."
     echo "  init          Initializes a multi repo management environment."
 	echo "  add           Add a repository at the given directory."
+	echo "  status        Show a one-line short repo status of all repos."
     exit 1
 }
 
@@ -38,6 +39,10 @@ init)
 add)
 	ensure_initialized
     $lib_dir/add.sh $remainingargs
+    ;;
+status)
+	ensure_initialized
+    $lib_dir/status.sh $remainingargs
     ;;
 *)
     echo "Invalid action '$action'"

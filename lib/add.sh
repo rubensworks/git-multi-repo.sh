@@ -1,5 +1,5 @@
 #!/bin/bash
-# Initialize a gmr environment
+# Add a repo
 
 # Validate input args
 if [[ $# -ne 1 ]] ; then
