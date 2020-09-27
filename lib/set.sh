@@ -9,19 +9,13 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 # Check if all targets exists
-TMPFILE=$(echo "$(pwd)/.gmr_tmp_set_targets")
-rm $TMPFILE 2> /dev/null
-touch $TMPFILE
+basedir=$(pwd)
 for target in "$@"
 do
 	if [ ! -d "$target" ] &&  [ ! -f "$target" ]; then
 	    echo "The target file or directory '$target' does not exists."
 	    exit 1
-		rm $TMPFILE
 	fi
-	
-	# Determine absolute path of file/dir
-	echo "$(cd "$(dirname "$target")"; pwd -P)/$(basename "$target")" >> .gmr_tmp_set_targets
 done
 
 # Add targets to all repos
@@ -32,15 +26,10 @@ do
    echo -e "\033[1m\033[34m$(basename $repo)\033[0m"
    
    # Copy all targets
-   cat $TMPFILE | while read target; do
-       cp -r $target .
-   done
-   # Stage all targets
    for target in "$@"; do
+	   cp -r $basedir/$target $target
 	   git add $target
    done
 
    popd > /dev/null
 done
-
-rm $TMPFILE
