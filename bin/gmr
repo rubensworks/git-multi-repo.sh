@@ -29,10 +29,24 @@ if [[ $# -lt 1 ]] ; then
     print_usage
 fi
 
+#remainingargs=''
+#for i in "${@:2}"; do 
+#    case "$i" in  
+#         *\ * )
+#		       #i="${i//\\/\\\\}"
+#		       remainingargs="$remainingargs \"${i//\"/\\\"}\""
+#               ;;
+#           *)
+#               remainingargs="$remainingargs $i"
+#               ;;
+#    esac
+#done
+
 # Execute action
 action=$1
-remainingargs=${@:2}
 lib_dir="$(dirname "${BASH_SOURCE[0]}")/../lib"
+args=( "${@:2}" )
+remainingargs="${args[@]}"
 case "$action" in
 version)
     cat $lib_dir/../VERSION
@@ -65,7 +79,8 @@ set)
     $lib_dir/set.sh $remainingargs
     ;;
 commit)
-    $lib_dir/commit.sh $remainingargs
+	ensure_initialized
+    $lib_dir/commit.sh "${args[@]}"
     ;;
 *)
     echo "Invalid action '$action'"
