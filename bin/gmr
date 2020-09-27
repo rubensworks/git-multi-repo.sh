@@ -11,6 +11,7 @@ print_usage () {
 	echo "  pull          Pull the latest version of the current branch from their origin of all repos."
 	echo "  stash         Run git stash in all repos."
 	echo "  set           Forcefully add the given file or directory in all repos, and stage changes."
+	echo "  commit        Creates a commit based on currently stages changes in all repos."
     exit 1
 }
 
@@ -62,6 +63,9 @@ stash)
 set)
 	ensure_initialized
     $lib_dir/set.sh $remainingargs
+    ;;
+commit)
+    $lib_dir/commit.sh $remainingargs
     ;;
 *)
     echo "Invalid action '$action'"
