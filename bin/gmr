@@ -49,6 +49,10 @@ pull)
 	ensure_initialized
     $lib_dir/pull.sh $remainingargs
     ;;
+push)
+	ensure_initialized
+    $lib_dir/push.sh $remainingargs
+    ;;
 *)
     echo "Invalid action '$action'"
     print_usage
