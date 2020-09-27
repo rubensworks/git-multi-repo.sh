@@ -1,0 +1,41 @@
+#!/bin/bash
+# Main bin script for Git Multi Repo Manager
+
+print_usage () {
+    echo "Usage: gmr <action>"
+    echo "Actions:"
+    echo "  version       Prints the current gmr version."
+    echo "  init          Initializes a multi repo management environment."
+    exit 1
+}
+
+ensure_initialized() {
+    if [[ ! -f .gmr-config.txt ]] ; then
+        echo "The current directory is not a valid experiment"
+        echo "First run 'gmr init', and try again in the created directory"
+        exit 1
+    fi
+}
+
+# Validate input args
+if [[ $# -lt 1 ]] ; then
+    echo "Error: Missing script action"
+    print_usage
+fi
+
+# Execute action
+action=$1
+remainingargs=${@:2}
+lib_dir="$(dirname "${BASH_SOURCE[0]}")/../lib"
+case "$action" in
+version)
+    cat $lib_dir/../VERSION
+    ;;
+init)
+    $lib_dir/init.sh $remainingargs
+    ;;
+*)
+    echo "Invalid action '$action'"
+    print_usage
+    ;;
+esac
