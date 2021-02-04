@@ -160,7 +160,7 @@ Additional options can optionally be passed, such as `-f`.
 Run git stash in all repos.
 
 ```bash
-$ gmr fetch
+$ gmr stash
 ```
 
 ### Add a file or directory
