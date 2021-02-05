@@ -184,6 +184,14 @@ $ gmr commit -m "My new commit"
 
 Additional options can optionally be passed, such as `--amend`.
 
+### Run a custom command
+
+Run a custom command in all repos.
+
+```bash
+$ gmr run git add -u
+```
+
 ## License
 
 This code is copyrighted by [Ruben Taelman](https://www.rubensworks.net/)

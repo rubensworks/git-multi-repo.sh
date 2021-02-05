@@ -14,6 +14,7 @@ print_usage () {
 	echo "  stash         Run git stash in all repos."
 	echo "  set           Forcefully add the given file or directory in all repos, and stage changes."
 	echo "  commit        Creates a commit based on currently stages changes in all repos."
+	echo "  run           Run a custom command in all repos."
     exit 1
 }
 
@@ -87,6 +88,10 @@ set)
 commit)
 	ensure_initialized
     $lib_dir/commit.sh "${args[@]}"
+    ;;
+run)
+	ensure_initialized
+    $lib_dir/run.sh "${args[@]}"
     ;;
 *)
     echo "Invalid action '$action'"
